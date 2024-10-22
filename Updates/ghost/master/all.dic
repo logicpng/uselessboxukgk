@@ -1,0 +1,86 @@
+// ---------------- boot --------------------
+
+OnFirstBoot
+{
+	firsttime = 1
+}
+
+OnBoot
+{
+	"\1\s[-1]\0\s[0]"
+}
+
+OnClose
+{
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}
+
+// ---------------- mouse --------------------
+
+OnMouseClick : all
+{
+	if reference4 == "switch"
+	{
+		if hardcore == 1 //hardcore mode has hardcore consequences
+		{
+			"\s[999]\_w[100]\i[98,wait]\_w[3000]"		
+			if RAND(1000) == 0; "\j[https://www.youtube.com/watch?v=dQw4w9WgXcQ]"
+			"\i[99,wait]\![vanishbymyself]"
+		}
+		else
+		{
+			if firsttime >= 1 //just not to get blasted by an angry cat right off the bat
+			{
+				case firsttime
+				{
+					when 1; "\s[1]"
+					when 2; "\s[1]"
+					when 3; "\s[2]"
+					when 4; "\s[6]"
+				}
+				firsttime++
+				if firsttime == 5; ERASEVAR('firsttime')
+				"\i[50,wait]\![raise,OnSurfaceRestore]"
+			}
+			else
+			{
+				_rand = RAND(9)
+				"\s[%(_rand)]\i[50,wait]\![embed,OnSurfaceRestore]"
+				if _rand == 8; "\s0\_w[1000]\s[9]\i[50,wait]\![raise,OnSurfaceRestore]" //extra peek
+			}
+		}
+	} 
+	elseif reference4 == "options"; OnSakuraMenu
+}
+
+// ---------------- options --------------------
+
+
+OnSakuraMenu : all
+{
+	"\0\s[0]\i[20]"
+
+	if hardcore == ""; "\![*]\q[Enable hardcore mode,OnHardcore]"
+	else; "\![*]\q[Disable hardcore mode,OnUnHardcore]"
+	"\n\![*]\q[Nevermind,blank]"	
+}
+
+OnHardcore : all
+{
+	"Are you sure you want to enable hardcore mode?\nThis may have irreversible consequences!\n[150]"
+
+	"\![*]\q[Yes,OnEnableHardcore]\n"
+	"\![*]\q[No,OnSakuraMenu]"
+}
+
+OnEnableHardcore
+{
+	hardcore = 1
+	OnSakuraMenu
+}
+
+OnUnHardcore
+{
+	ERASEVAR('hardcore')
+	OnSakuraMenu
+}

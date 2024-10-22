@@ -1,0 +1,506 @@
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+//so this is how i "atone" for making it nearly impossible to make custom shells
+//for Aster Assistant Software (~290 images in updated shell) and Aster Terror Star (~430 images)
+//which btw if you never played with them i'm very proud of them so im obligated to plug
+//https://logicpng.neocities.org/asterukagaka
+//https://logicpng.neocities.org/terrorstarukagaka
+
+//either way i'm not gonna hold my breath anyone will actually want to make a custom shell for
+//this one, but im hoping i at least made it viable. even if i feel like i have to leave in an explanation just in case
+//if not for anyone else, then for myself
+
+//ABOUT THE FOLLOWING CODE:
+
+//most of the code for the box happens in here rather than the .dic files
+//the way im doing it this time is basically making pieces of animations and then
+//construct them into sequences per surface
+
+//this helps figure out the layer order of each animation piece and then only worry about timing later
+//this still may be more complicated than necessary and throw some wrenches if anyone tries making a custom shell
+//including me for that matter
+//and like. it has even with this shell
+
+//but as long as surface0 with a collision for the switch exist,
+//and surfaces1-8 have an animation 50 with a sequence that the code can wait for,
+//these can be done either frame by frame or in a similar manner
+
+//if you don't want to fill out every single animation you can just do an surface.append1-8 and put an animation50 there
+
+//surface9 is an extra angry peek without the switch flipped. that one is called directly in the code (all.dic, OnMouseClick)
+//if it happened so select surface8. so pls be mindful of that one
+
+//idle
+surface0
+{
+	//collision for the forbidden switch
+	collisionex0,switch,polygon,57,82,63,75,73,80,92,107,85,112,67,103,56,92
+	
+	//just assemble the box, nothing complicated
+	element0,overlay,surface1000.png,0,0
+	element1,overlay,surface1001.png,0,0
+	element2,overlay,surface2000.png,0,0
+	element3,overlay,surface5000.png,0,0
+}
+
+//ANIMATION SEQUENCES
+//Explanation for the actual parts below surfaces 1-9
+
+//so first on pattern0 i set up the box itself: back of it, the cat hiding in it (body and head), the lid opening, the switch flipped
+//then with overlay,-1 i can set up the delays and start and stop (hide) animations inbetween them
+//note that these delays have to be with the lengths of animations in mind, the time starts when the animation does and doesn't know how to wait
+//also note that the final pattern should be a delay as well: otherwise the animation will be considered "finished" as soon as the final "start", well, starts
+
+//switch flipped
+surface1
+{
+	//controller
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,500,0,0
+	animation50.pattern2,start,3
+	animation50.pattern3,overlay,-1,1000,0,0
+	animation50.pattern4,start,12
+	animation50.pattern5,overlay,-1,1000,0,0
+	animation50.pattern6,stop,12
+	animation50.pattern7,start,5
+	animation50.pattern8,overlay,-1,50,0,0
+	animation50.pattern9,start,10
+	animation50.pattern10,overlay,-1,50,0,0
+}
+
+//same anim but stares for longer
+surface2
+{
+	//controller
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,500,0,0
+	animation50.pattern2,start,3
+	animation50.pattern3,overlay,-1,3000,0,0
+	animation50.pattern4,start,12
+	animation50.pattern5,overlay,-1,150,0,0
+	animation50.pattern6,stop,12
+	animation50.pattern7,start,5
+	animation50.pattern8,overlay,-1,50,0,0
+	animation50.pattern9,start,10
+	animation50.pattern10,overlay,-1,50,0,0
+}
+
+//same anim face 2
+surface3
+{
+	//controller
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,100,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,1000,0,0
+	animation50.pattern4,start,12
+	animation50.pattern5,overlay,-1,200,0,0
+	animation50.pattern6,stop,12
+	animation50.pattern7,start,5
+	animation50.pattern8,overlay,-1,50,0,0
+	animation50.pattern9,start,10
+	animation50.pattern10,overlay,-1,50,0,0
+}
+
+//same anim face 2 stares for longer
+surface4
+{
+	//controller
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,1000,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,3000,0,0
+	animation50.pattern4,start,12
+	animation50.pattern5,overlay,-1,2500,0,0
+	animation50.pattern6,stop,12
+	animation50.pattern7,start,6
+	animation50.pattern8,overlay,-1,20,0,0
+	animation50.pattern9,start,10
+	animation50.pattern10,overlay,-1,50,0,0
+}
+
+//same anim face 2 but slower head raise and quicker lower
+surface5
+{
+	//controller
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,100,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,1000,0,0
+	animation50.pattern4,start,6
+	animation50.pattern5,overlay,-1,1000,0,0
+	animation50.pattern6,start,4
+	animation50.pattern7,overlay,-1,300,0,0
+	animation50.pattern8,start,6
+	animation50.pattern9,overlay,-1,300,0,0
+	animation50.pattern10,start,4
+	animation50.pattern11,overlay,-1,2000,0,0
+	animation50.pattern12,start,12
+	animation50.pattern13,overlay,-1,300,0,0
+	animation50.pattern14,stop,12
+	animation50.pattern15,start,6
+	animation50.pattern16,overlay,-1,50,0,0
+	animation50.pattern17,start,10
+	animation50.pattern18,overlay,-1,50,0,0
+}
+
+//peeks from the box and flips the switch
+surface6
+{
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,500,0,0
+	animation50.pattern2,start,3
+	animation50.pattern3,overlay,-1,2500,0,0
+	animation50.pattern4,start,12
+	animation50.pattern5,overlay,-1,1000,0,0
+	animation50.pattern6,stop,12
+	animation50.pattern7,start,5
+	animation50.pattern8,overlay,-1,50,0,0
+	animation50.pattern9,start,10
+	animation50.pattern10,overlay,-1,50,0,0
+}
+
+//peeks from the box angrily and flips the switch
+surface7
+{
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,500,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,2500,0,0
+	animation50.pattern4,start,7
+	animation50.pattern5,start,12
+	animation50.pattern6,overlay,-1,500,0,0
+	animation50.pattern7,stop,7
+	animation50.pattern8,stop,12
+	animation50.pattern9,start,6
+	animation50.pattern10,overlay,-1,50,0,0
+	animation50.pattern11,start,10
+	animation50.pattern12,overlay,-1,50,0,0
+}
+
+//angry raise, box shakes, switch is flipped back and fourth a few times before hiding
+surface8
+{
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,14,2)
+	animation50.pattern1,overlay,-1,100,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,100,0,0
+	animation50.pattern4,move,0,25,-1,1
+	animation50.pattern5,move,0,25,2,-2
+	animation50.pattern6,move,0,25,-1,2
+	animation50.pattern7,move,0,25,0,-1
+	animation50.pattern8,move,0,25,-1,1
+	animation50.pattern9,move,0,25,2,-2
+	animation50.pattern10,move,0,25,-1,2
+	animation50.pattern11,move,0,25,0,-1
+	animation50.pattern12,move,0,25,-1,1
+	animation50.pattern13,move,0,25,2,-2
+	animation50.pattern14,move,0,25,-1,2
+	animation50.pattern15,move,0,25,0,-1
+	animation50.pattern16,move,0,25,-1,1
+	animation50.pattern17,move,0,25,2,-2
+	animation50.pattern18,move,0,25,-1,2
+	animation50.pattern19,move,0,25,0,-1
+	animation50.pattern20,move,0,25,0,0
+	animation50.pattern21,start,7
+	animation50.pattern22,start,12
+	animation50.pattern23,overlay,-1,150,0,0
+	animation50.pattern24,start,13
+	animation50.pattern25,overlay,-1,150,0,0
+	animation50.pattern26,start,12
+	animation50.pattern27,overlay,-1,150,0,0
+	animation50.pattern28,start,13
+	animation50.pattern29,overlay,-1,150,0,0
+	animation50.pattern30,start,12
+	animation50.pattern31,overlay,-1,150,0,0
+	animation50.pattern32,start,13
+	animation50.pattern33,overlay,-1,150,0,0
+	animation50.pattern34,start,12
+	animation50.pattern35,overlay,-1,150,0,0
+	animation50.pattern36,stop,12
+	animation50.pattern37,stop,7
+	animation50.pattern38,overlay,-1,2000,0,0
+	animation50.pattern39,start,6
+	animation50.pattern40,overlay,-1,50,0,0
+	animation50.pattern41,start,10
+	animation50.pattern42,overlay,-1,50,0,0
+}
+
+//switch unflipped, angry peeking and hide
+//this is the only animation that doesn't actually involve the switch getting flipped
+
+surface9
+{
+	animation50.interval,never
+	animation50.pattern0,parallelstart,(0,1,8,9,15,2)
+	animation50.pattern1,overlay,-1,500,0,0
+	animation50.pattern2,start,4
+	animation50.pattern3,overlay,-1,2500,0,0
+	animation50.pattern9,start,6
+	animation50.pattern10,overlay,-1,50,0,0
+	animation50.pattern11,start,10
+	animation50.pattern12,overlay,-1,50,0,0
+}
+
+//hardcore consequences
+//you honestly probably only need to change the elements for this one
+//(unless you redraw the explosion frames?)
+//they can be the same as surface0 but the switch is flipped
+surface999
+{
+	element0,overlay,surface1000.png,0,0
+	element1,overlay,surface1001.png,0,0
+	element2,overlay,surface2000.png,0,0
+	element3,overlay,surface5001.png,0,0
+
+	animation98.interval,never
+	animation98.pattern0,move,0,25,-1,1
+	animation98.pattern1,move,0,25,2,-2
+	animation98.pattern2,move,0,25,-1,2
+	animation98.pattern3,move,0,25,0,-1
+	animation98.pattern4,move,0,25,-1,1
+	animation98.pattern5,move,0,25,2,-2
+	animation98.pattern6,move,0,25,-1,2
+	animation98.pattern7,move,0,25,0,-1
+	animation98.pattern8,move,0,25,-1,1
+	animation98.pattern9,move,0,25,2,-2
+	animation98.pattern10,move,0,25,-1,2
+	animation98.pattern11,move,0,25,0,-1
+	animation98.pattern12,move,0,25,-1,1
+	animation98.pattern13,move,0,25,2,-2
+	animation98.pattern14,move,0,25,-1,2
+	animation98.pattern15,move,0,25,0,-1
+	animation98.pattern16,move,0,25,-1,1
+	animation98.pattern17,move,0,25,2,-2
+	animation98.pattern18,move,0,25,-1,2
+	animation98.pattern19,move,0,25,0,-1
+	animation98.pattern20,move,0,25,-1,1
+	animation98.pattern21,move,0,25,2,-2
+	animation98.pattern22,move,0,25,-1,2
+	animation98.pattern23,move,0,25,0,-1
+	animation98.pattern24,move,0,25,-1,1
+	animation98.pattern25,move,0,25,2,-2
+	animation98.pattern26,move,0,25,-1,2
+	animation98.pattern27,move,0,25,0,-1
+	animation98.pattern28,move,0,25,-1,1
+	animation98.pattern29,move,0,25,2,-2
+	animation98.pattern30,move,0,25,-1,2
+	animation98.pattern31,move,0,25,0,-1
+	animation98.pattern32,move,0,25,-1,1
+	animation98.pattern33,move,0,25,2,-2
+	animation98.pattern34,move,0,25,-1,2
+	animation98.pattern35,move,0,25,0,-1
+	animation98.pattern36,move,0,25,0,0
+
+	animation99.interval,never
+	animation99.pattern37,overlay,6000,0,0,0
+	animation99.pattern38,overlay,6001,30,0,0
+	animation99.pattern39,overlay,6002,30,0,0
+	animation99.pattern40,overlay,6003,30,0,0
+	animation99.pattern41,overlay,6004,30,0,0
+	animation99.pattern41,overlay,6004,70,0,0
+}
+
+//animation parts
+//constructing the box with the cat inside
+//+animations consistent between surfaces
+
+//note:
+//this was supposed to be one append, but i had to split it
+//so that i can have the cat show up all the way and only peek
+//please note that some of these animations are mutually exclusive (through stop, and parallelstop)
+//this is so that the final frame of the respective animations doesn't persist
+
+//paw flick animations also "flip" the switch on its own (thorugh start),
+//you don't need to call the switch change individually
+surface.append1-9
+{
+	//back of the box
+	animation0.interval,never
+	animation0.pattern0,overlay,1000,0,0,0
+
+	//cat back
+	animation1.interval,never
+	animation1.pattern0,overlay,1002,0,0,0
+
+	//cat head start
+	animation2.interval,never
+	animation2.pattern0,overlay,3000,0,0,0
+
+	// //front of box
+	animation8.interval,never
+	animation8.pattern0,overlay,1001,0,0,0
+	
+	//lid shut
+	animation11.interval,never
+	animation11.pattern0,overlay,2000,0,0
+	
+	//paw flick to off
+	animation12.interval,never
+	animation12.pattern0,stop,13
+	animation12.pattern1,overlay,4003,0,0,0
+	animation12.pattern2,overlay,4002,50,0,0
+	animation12.pattern3,overlay,4001,50,0,0
+	animation12.pattern4,start,15
+	animation12.pattern5,overlay,4000,50,0,0
+
+	//paw flick to on
+	animation13.interval,never
+	animation13.pattern0,stop,12
+	animation13.pattern1,overlay,4000,0,0,0
+	animation13.pattern2,overlay,4001,50,0,0
+	animation13.pattern3,overlay,4002,50,0,0
+	animation13.pattern4,start,14
+	animation13.pattern5,overlay,4003,50,0,0
+
+	//switch on
+	animation14.interval,never
+	animation14.pattern0,overlay,5001,0,0,0
+	animation14.pattern1,stop,15
+
+	//switch off
+	animation15.interval,never
+	animation15.pattern0,overlay,5000,0,0,0
+	animation15.pattern1,stop,14
+}
+
+//animations for the cat raising all the way up and lid fully opening
+surface.append1-5,8
+{
+	// //cat raise
+	animation3.interval,never
+	animation3.pattern0,parallelstop,(5,6,2)
+	animation3.pattern1,overlay,3000,0,0,-10
+	animation3.pattern2,overlay,3000,30,0,-20
+	animation3.pattern3,overlay,3000,30,0,-30
+
+	//cat raise angry
+	animation4.interval,never
+	animation4.pattern0,parallelstop,(5,6,2)
+	animation4.pattern2,overlay,3001,0,0,-10
+	animation4.pattern3,overlay,3001,30,0,-20
+	animation4.pattern4,overlay,3001,30,0,-30
+
+	//cat hide
+	animation5.interval,never
+	animation5.pattern0,parallelstop,(3,4)
+	animation5.pattern1,overlay,3000,0,0,-30
+	animation5.pattern2,overlay,3000,30,0,-20
+	animation5.pattern3,overlay,3000,30,0,-10
+	animation5.pattern4,overlay,3000,30,0,0
+
+	// //cat hide angry
+	animation6.interval,never
+	animation6.pattern0,parallelstop,(3,4)
+	animation6.pattern1,overlay,3001,0,0,-30
+	animation6.pattern2,overlay,3001,10,0,-20
+	animation6.pattern3,overlay,3001,10,0,-10
+	animation6.pattern4,overlay,3001,10,0,0
+
+	//cat face squint
+	animation7.interval,never
+	animation7.pattern0,overlay,3002,0,0,-30
+
+
+	//open lid
+	animation9.interval,never
+	animation9.pattern0,stop,11
+	animation9.pattern1,overlay,2001,0,0,0
+	animation9.pattern2,interpolate,2002,100,0,0
+	animation9.pattern3,interpolate,2003,100,0,0
+
+	// //close lid
+	animation10.interval,never
+	animation10.pattern0,stop,9
+	animation10.pattern1,interpolate,2002,0,0,0
+	animation10.pattern2,overlay,2001,100,0,0
+	animation10.pattern3,overlay,-1,100,0,0
+	animation10.pattern4,start,11
+}
+
+//animations for the cat only peeking a little and the lid not opening fully
+//peeking
+surface.append6-7,9
+{
+	// //cat raise
+	animation3.interval,never
+	animation3.pattern0,parallelstop,(5,6,2)
+	animation3.pattern1,overlay,3000,0,0,-5
+	animation3.pattern2,overlay,3000,30,0,-10
+	animation3.pattern3,overlay,3000,30,0,-15
+
+	//cat raise angry
+	animation4.interval,never
+	animation4.pattern0,parallelstop,(5,6,2)
+	animation4.pattern2,overlay,3001,0,0,-5
+	animation4.pattern3,overlay,3001,30,0,-10
+	animation4.pattern4,overlay,3001,30,0,-15
+
+	//cat hide
+	animation5.interval,never
+	animation5.pattern0,parallelstop,(3,4)
+	animation5.pattern1,overlay,3000,0,0,-15
+	animation5.pattern2,overlay,3000,30,0,-10
+	animation5.pattern3,overlay,3000,30,0,-5
+	animation5.pattern4,overlay,3000,30,0,0
+
+	// //cat hide angry
+	animation6.interval,never
+	animation6.pattern0,parallelstop,(3,4)
+	animation6.pattern1,overlay,3001,0,0,-15
+	animation6.pattern2,overlay,3001,10,0,-10
+	animation6.pattern3,overlay,3001,10,0,-5
+	animation6.pattern4,overlay,3001,10,0,0
+
+	//cat face squint
+	animation7.interval,never
+	animation7.pattern0,overlay,3002,0,0,-15
+
+	//open lid
+	animation9.interval,never
+	animation9.pattern0,stop,11
+	animation9.pattern1,overlay,2001,0,0,0
+	animation9.pattern2,interpolate,2002,100,0,0
+	// //close lid
+	animation10.interval,never
+	animation10.pattern0,stop,9
+	animation10.pattern2,overlay,2001,0,0,0
+	animation10.pattern3,overlay,-1,100,0,0
+	animation10.pattern4,start,11
+}
+
+//animation20 for being able to press the options button. perists between all surfaces except 999
+//if you're on 999 it's already too late
+
+//options button press
+surface.append0-9
+{
+	collisionex1,options,polygon,160,187,173,174,182,187,177,204,163,204
+
+	animation20.interval,never
+	animation20.pattern0,overlay,1011,0,0,0
+	animation20.pattern1,overlay,-1,100,0,0
+}
+
+
+//—————————————————————————————— Kero surfaces ——————————————————————————————
+//sorry kero
+
+surface10
+{
+	//collision0,0,0,130,65,head
+}

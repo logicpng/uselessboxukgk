@@ -1,0 +1,63 @@
+OnSurfaceRestore
+{
+	"\1\s[-1]\0\s[0]"
+}
+
+OnWindowStateRestore
+{
+	"\1\s[-1]\0\s[0]"
+}
+
+On_homeurl
+{
+	"https://raw.githubusercontent.com/logicpng/uselessboxukgk/main/Updates/"
+}
+
+
+//—————————————————————————————— Right click menu links ——————————————————————————————
+
+//Takes an array of alternating names and urls, and formats them for use with the right click menu
+FormatLinks : all
+{
+	for _i = 0; _i < ARRAYSIZE(_argv); _i++
+	{
+		_argv[_i] //Add the link/title
+		//Alternate between adding %ASC(1) or %ASC(2)
+		if _i % 2 == 1; "%ASC(2)"
+		else; "%ASC(1)"
+	}
+}
+
+On_recommendrootbutton.caption
+{
+	"Made by:"
+}
+
+On_portalrootbutton.caption
+{
+	"Resources used"
+}
+
+On_sakura.recommendsites
+{
+	FormatLinks(recommendsites_sakura)
+}
+
+//These are the websites linked in the top option of the sakura's right click menu. The format is simple; write the label of the link on the left followed by a semicolon, and then on the right, the url to link to. These should be separate strings.
+recommendsites_sakura : array
+{
+	"Logic.png @ NyxOS";	"https://logicpng.neocities.org/"
+}
+
+On_sakura.portalsites 
+{
+	FormatLinks(portalsites_sakura)
+}
+
+//These are the websites linked in the second option of the sakura's right click menu. Same as above
+portalsites_sakura : array
+{
+	"UKADOC Project (EN)";	"https://ukagakadreamteam.github.io/ukadoc/manual/index.html"
+	"UKADOC Project (JP)";	"https://ssp.shillest.net/ukadoc/manual/index.html"
+	"Simplicity template";	"https://ukagaka.zichqec.com/template/simplicity_template"
+}
